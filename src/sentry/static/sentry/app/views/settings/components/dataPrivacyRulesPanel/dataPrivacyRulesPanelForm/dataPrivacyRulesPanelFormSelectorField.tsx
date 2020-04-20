@@ -10,13 +10,11 @@ import {defined} from 'app/utils';
 import {
   unaryOperatorSuggestions,
   binaryOperatorSuggestions,
-  Suggestion,
-  Suggestions,
-  SuggestionType,
-} from './dataPrivacyRulesPanelSelectorFieldTypes';
+} from './dataPrivacyRulesPanelFormSelectorFieldSuggestions';
+import {Suggestion, SuggestionType} from '../types';
 
 type State = {
-  suggestions: Suggestions;
+  suggestions: Array<Suggestion>;
   fieldValues: Array<Suggestion | Array<Suggestion>>;
   activeSuggestion: number;
   showSuggestions: boolean;
