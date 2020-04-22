@@ -98,7 +98,7 @@ class DataPrivacyRulesPanelRuleModal extends React.Component<Props, State> {
         hasDeleteButton={hasDeleteButton}
       >
         <Modal.Header closeButton>
-          {t(`Data Privacy Rules - ${hasDeleteButton ? 'Add' : 'Edit'} Rule`)}
+          {t(`Data Privacy Rules - ${hasDeleteButton ? 'Edit' : 'Add'} Rule`)}
         </Modal.Header>
         <ModalContent>
           <DataPrivacyRulesPanelForm
