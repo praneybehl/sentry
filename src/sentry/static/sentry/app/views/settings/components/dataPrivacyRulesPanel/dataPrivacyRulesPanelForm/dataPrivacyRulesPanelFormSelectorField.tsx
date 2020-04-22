@@ -10,8 +10,9 @@ import {defined} from 'app/utils';
 import {
   unaryOperatorSuggestions,
   binaryOperatorSuggestions,
+  Suggestion,
+  SuggestionType,
 } from './dataPrivacyRulesPanelFormSelectorFieldSuggestions';
-import {Suggestion, SuggestionType} from '../types';
 
 type State = {
   suggestions: Array<Suggestion>;

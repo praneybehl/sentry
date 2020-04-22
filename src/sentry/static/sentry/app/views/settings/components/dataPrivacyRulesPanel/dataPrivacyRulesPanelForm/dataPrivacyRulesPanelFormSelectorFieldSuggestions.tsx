@@ -1,6 +1,12 @@
 import {t} from 'app/locale';
 
-import {Suggestion} from '../types';
+export type SuggestionType = 'value' | 'unary' | 'binary' | 'string';
+
+export type Suggestion = {
+  type: SuggestionType;
+  value: string;
+  description?: string;
+};
 
 const binaryOperatorSuggestions: Array<Suggestion> = [
   {

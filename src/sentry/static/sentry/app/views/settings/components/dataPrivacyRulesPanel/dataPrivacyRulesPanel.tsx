@@ -17,7 +17,16 @@ import DataPrivacyRulesPanelEmpty, {
 } from './dataPrivacyRulesPanelEmpty';
 import DataPrivacyRulesPanelButtonAddRule from './dataPrivacyRulesPanelButtonAddRule';
 import {RULE_TYPE, METHOD_TYPE, EVENT_ID_FIELD_STATUS} from './utils';
-import {Rule, Suggestion} from './types';
+
+type Rule = NonNullable<
+  React.ComponentProps<typeof DataPrivacyRulesPanelRuleModal>['rule']
+>;
+
+type EventId = React.ComponentProps<typeof DataPrivacyRulesPanelRuleModal>['eventId'];
+
+type Suggestions = React.ComponentProps<
+  typeof DataPrivacyRulesPanelRuleModal
+>['selectorSuggestions'];
 
 type PiiConfig = {
   type: RULE_TYPE;
@@ -44,8 +53,8 @@ type State = {
   rules: Array<Rule>;
   savedRules: Array<Rule>;
   relayPiiConfig?: string;
-  selectorSuggestions: Array<Suggestion>;
-  eventId: React.ComponentProps<typeof DataPrivacyRulesPanelRuleModal>['eventId'];
+  selectorSuggestions: Suggestions;
+  eventId: EventId;
   showAddRuleModal?: boolean;
 };
 
@@ -161,7 +170,7 @@ class DataPrivacyRulesPanel extends React.Component<Props, State> {
         `/organizations/${organization.slug}/data-scrubbing-selector-suggestions/`,
         {method: 'GET', query}
       );
-      const selectorSuggestions: Array<Suggestion> = rawSuggestions.suggestions;
+      const selectorSuggestions: Suggestions = rawSuggestions.suggestions;
 
       if (selectorSuggestions && selectorSuggestions.length > 0) {
         this.setState(prevState => ({

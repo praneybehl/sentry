@@ -16,19 +16,29 @@ import DataPrivacyRulesPanelSelectorField from './dataPrivacyRulesPanelFormSelec
 import DataPrivacyRulesPanelFormField from './dataPrivacyRulesPanelFormField';
 import DataPrivacyRulesPanelFormSelectControl from './dataPrivacyRulesPanelFormSelectControl';
 import DataPrivacyRulesPanelFormEventId from './dataPrivacyRulesPanelFormEventId';
-import {Rule, Suggestion} from '../types';
+
+type Rule = {
+  id: number;
+  type: RULE_TYPE;
+  method: METHOD_TYPE;
+  from: string;
+  customRegularExpression?: string;
+};
 
 type DataPrivacyRulesPanelFormEventIdProps = React.ComponentProps<
   typeof DataPrivacyRulesPanelFormEventId
 >;
 
-type Props = DataPrivacyRulesPanelFormEventIdProps & {
-  selectorSuggestions: Array<Suggestion>;
-  rule: Rule;
-  onChange: (rule: Rule) => void;
-  onUpdateEventId: (eventId: string) => void;
-  disabled?: boolean;
-};
+type DataPrivacyRulesPanelSelectorFieldProps = React.ComponentProps<
+  typeof DataPrivacyRulesPanelSelectorField
+>;
+
+type Props = DataPrivacyRulesPanelFormEventIdProps &
+  Pick<DataPrivacyRulesPanelSelectorFieldProps, 'disabled' | 'selectorSuggestions'> & {
+    rule: Rule;
+    onChange: (rule: Rule) => void;
+    onUpdateEventId: (eventId: string) => void;
+  };
 
 type State = {
   errors: {

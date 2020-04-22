@@ -12,21 +12,24 @@ import {defined} from 'app/utils';
 
 import DataPrivacyRulesPanelForm from './dataPrivacyRulesPanelForm/dataPrivacyRulesPanelForm';
 import {RULE_TYPE, METHOD_TYPE} from './utils';
-import {Rule} from './types';
 
 const DEFAULT_RULE_FROM_VALUE = '';
 
-type DataPrivacyRulesPanelFormProps = Pick<
-  React.ComponentProps<typeof DataPrivacyRulesPanelForm>,
-  'selectorSuggestions' | 'onUpdateEventId' | 'disabled' | 'eventId'
+type DataPrivacyRulesPanelFormProps = React.ComponentProps<
+  typeof DataPrivacyRulesPanelForm
 >;
 
-type Props = DataPrivacyRulesPanelFormProps & {
-  rule?: Rule;
-  onSaveRule: (rule: Rule) => void;
-  onClose: () => void;
-  onDeleteRule?: (rulesToBeDeleted: Array<Rule['id']>) => void;
-};
+type Rule = DataPrivacyRulesPanelFormProps['rule'];
+
+type Props = Pick<
+  DataPrivacyRulesPanelFormProps,
+  'selectorSuggestions' | 'onUpdateEventId' | 'disabled' | 'eventId'
+> &
+  Partial<Pick<DataPrivacyRulesPanelFormProps, 'rule'>> & {
+    onSaveRule: (rule: Rule) => void;
+    onClose: () => void;
+    onDeleteRule?: (rulesToBeDeleted: Array<Rule['id']>) => void;
+  };
 
 type State = {
   rule: Rule;

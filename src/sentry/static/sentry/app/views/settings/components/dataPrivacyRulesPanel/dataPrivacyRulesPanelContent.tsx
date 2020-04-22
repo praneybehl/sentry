@@ -10,11 +10,12 @@ import {defined} from 'app/utils';
 import DataPrivacyRulesPanelContentFilter from './dataPrivacyRulesPanelContentFilter';
 import DataPrivacyRulesPanelRuleModal from './dataPrivacyRulesPanelRuleModal';
 import {getRuleTypeSelectorFieldLabel, getMethodTypeSelectorFieldLabel} from './utils';
-import {Rule} from './types';
 
 type DataPrivacyRulesPanelRuleModalProps = React.ComponentProps<
   typeof DataPrivacyRulesPanelRuleModal
 >;
+
+type Rule = NonNullable<DataPrivacyRulesPanelRuleModalProps['rule']>;
 
 type Props = {
   rules: Array<Rule>;
@@ -203,7 +204,11 @@ const ListItem = styled('li')<{isChecked?: boolean}>`
     opacity: ${p => (p.isChecked ? 1 : 0.3)};
   }
 
-  &:hover ${StyledIconDelete}, &:hover ${CheckboxFancy} {
+  &:hover ${StyledIconDelete} {
+    opacity: 1;
+  }
+
+  &:hover ${CheckboxFancy} {
     opacity: 1;
   }
 
