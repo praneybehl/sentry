@@ -446,7 +446,6 @@ export type DocumentIntegration = {
 export type GlobalSelection = {
   projects: number[];
   environments: string[];
-  forceUrlSync?: boolean;
   datetime: {
     start: Date | null;
     end: Date | null;
