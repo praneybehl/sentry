@@ -7,6 +7,7 @@ import ConfigStore from 'app/stores/configStore';
 import LinkWithConfirmation from 'app/components/links/linkWithConfirmation';
 import {User} from 'app/types';
 import {Theme} from 'app/utils/theme';
+import Tooltip from 'app/components/tooltip';
 
 import EditorTools from './editorTools';
 
@@ -17,9 +18,10 @@ type Props = {
   onDelete: () => void;
 };
 
-function canEdit(editingUser: User) {
+function canEdit(commentUser: User) {
   const user = ConfigStore.get('user');
-  return user && (user.isSuperuser || user.id === editingUser.id);
+
+  return user && (user.isSuperuser || user.id === commentUser.id);
 }
 
 const NoteHeader = ({authorName, user, onEdit, onDelete}: Props) => (
@@ -27,7 +29,12 @@ const NoteHeader = ({authorName, user, onEdit, onDelete}: Props) => (
     <ActivityAuthor>{authorName}</ActivityAuthor>
     {canEdit(user) && (
       <EditorTools>
-        <Edit onClick={onEdit}>{t('Edit')}</Edit>
+        <Tooltip
+          title={t('You can edit this comment due to your superuser status')}
+          disabled={!ConfigStore.get('user').isSuperuser}
+        >
+          <Edit onClick={onEdit}>{t('Edit')}</Edit>
+        </Tooltip>
         <LinkWithConfirmation
           title={t('Remove')}
           message={t('Are you sure you wish to delete this comment?')}
